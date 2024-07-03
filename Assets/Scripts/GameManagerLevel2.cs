@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ButtonTextGetter : MonoBehaviour
+public class GameManagerLevel2 : MonoBehaviour
 {
 
     public TextMeshProUGUI[] buttonTexts;
@@ -17,12 +17,12 @@ public class ButtonTextGetter : MonoBehaviour
     private HashSet<char> uniqueLetters = new HashSet<char>();
     int score = 0;
     private WordList wordDictionary;
-    private RandomLetterGenerator RLG;
+    // private RandomLetterGenerator RLG;
     private Timer TimeLeft;
     void Start()
     {
         wordDictionary = FindObjectOfType<WordList>();
-        RLG = FindObjectOfType<RandomLetterGenerator>();
+        // RLG = FindObjectOfType<RandomLetterGenerator>();
         TimeLeft = FindObjectOfType<Timer>();
 
         for (int i = 0; i < buttons.Length; i++)
@@ -68,7 +68,7 @@ public class ButtonTextGetter : MonoBehaviour
 
     public void EnterText()
     {
-        if (TimeLeft.timer >= 0)
+        if (TimeLeft.timer > 0)
         {
             CheckWord(displayText.text);
         }
@@ -103,7 +103,7 @@ public class ButtonTextGetter : MonoBehaviour
 
     void ResetLetters()
     {
-        RLG.DoGeneration();
+        // RLG.DoGeneration();
         ClearDisplayText();
     }
     void ReloadScene()
@@ -113,6 +113,6 @@ public class ButtonTextGetter : MonoBehaviour
     }
     void NextScene()
     {
-        SceneManager.LoadScene("Level 2");
+        SceneManager.LoadScene("Level3");
     }
 }

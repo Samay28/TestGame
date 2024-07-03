@@ -1788,7 +1788,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 1 Game Started!
+  m_text: Level 2 Game Started!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
@@ -2577,8 +2577,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1536729245}
   - component: {fileID: 1536729246}
-  - component: {fileID: 1536729247}
   - component: {fileID: 1536729248}
+  - component: {fileID: 1536729249}
   m_Layer: 0
   m_Name: ButtonsHandler
   m_TagString: Untagged
@@ -2623,7 +2623,7 @@ MonoBehaviour:
   - {fileID: 1115321922}
   - {fileID: 1161060621}
   - {fileID: 1098309997}
---- !u!114 &1536729247
+--- !u!114 &1536729248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2632,7 +2632,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1536729244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c297917356e2cf4a8cb0ade5db789c8, type: 3}
+  m_Script: {fileID: 11500000, guid: aa6f86f68b5bd09459d27c1acd7b3a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordListTextAsset: {fileID: 4900000, guid: 6a928144c4f682342914b7cd07f032e8, type: 3}
+--- !u!114 &1536729249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536729244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba6ddc177ac0c0459446792ab794327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buttonTexts:
@@ -2658,19 +2671,6 @@ MonoBehaviour:
   displayText: {fileID: 1699373068}
   scoreText: {fileID: 510209777}
   InfoText: {fileID: 1079879721}
---- !u!114 &1536729248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536729244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa6f86f68b5bd09459d27c1acd7b3a70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wordListTextAsset: {fileID: 4900000, guid: 6a928144c4f682342914b7cd07f032e8, type: 3}
 --- !u!1 &1665635165
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,8 +3273,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1536729247}
-        m_TargetAssemblyTypeName: ButtonTextGetter, Assembly-CSharp
+      - m_Target: {fileID: 1536729249}
+        m_TargetAssemblyTypeName: GameManagerLevel2, Assembly-CSharp
         m_MethodName: EnterText
         m_Mode: 1
         m_Arguments:
