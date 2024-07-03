@@ -11,8 +11,12 @@ public class JumbledWordGeneration3 : MonoBehaviour
     public string currentAnswer;
     public TMP_Text questionText;
 
+    private List<QuestionData> remainingQuestions = new List<QuestionData>();
+    private List<QuestionData> askedQuestions = new List<QuestionData>();
+
     void Start()
-    {
+    {   
+        remainingQuestions = new List<QuestionData>(questions);
         DoGeneration();
     }
 
@@ -23,15 +27,25 @@ public class JumbledWordGeneration3 : MonoBehaviour
     }
     public char[] LoadRandomQuestion()
     {
-        QuestionData randomQuestion = questions[Random.Range(0, questions.Length)];
+        if (remainingQuestions.Count == 0)
+        {
+            Debug.Log("All questions have been asked.");
+            return null;
+        }
+
+        QuestionData randomQuestion = remainingQuestions[Random.Range(0, remainingQuestions.Count)];
+
+        remainingQuestions.Remove(randomQuestion);
+        askedQuestions.Add(randomQuestion);
 
         questionText.text = randomQuestion.question;
         currentAnswer = randomQuestion.correctAnswer;
 
         string answer = currentAnswer;
-        char[] letters = new char[9]; // Array for 9 letters
+        char[] letters = new char[9];
         System.Random rand = new System.Random();
 
+      
         for (int i = 0; i < answer.Length; i++)
         {
             int index;
@@ -43,7 +57,7 @@ public class JumbledWordGeneration3 : MonoBehaviour
             letters[index] = answer[i];
         }
 
-
+    
         string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < 9; i++)
         {
@@ -59,7 +73,10 @@ public class JumbledWordGeneration3 : MonoBehaviour
             }
         }
 
+        
         letters = letters.OrderBy(x => rand.Next()).ToArray();
+
+       
         for (int i = 0; i < 9; i++)
         {
             LetterDisplays[i].text = letters[i].ToString();

@@ -37,13 +37,17 @@ public class GameManagerLevel3 : MonoBehaviour
     {
         if (TimeLeft.timer == 0 && score >= 3)
         {
-            InfoText.text = "Game Won! Starting New Level!";
+            InfoText.text = "Game Won! Starting New Level 1!";
             Invoke("NextScene", 5f);
         }
         else if (TimeLeft.timer == 0 && score < 3)
         {
             InfoText.text = "Game Lost! restarting Level!";
             Invoke("ReloadScene", 5f);
+        }
+        else if (score == 6)
+        {
+            InfoText.text = "Unbelievable! All Questions Answered!";
         }
     }
     void PrintButtonLetter(int buttonIndex)

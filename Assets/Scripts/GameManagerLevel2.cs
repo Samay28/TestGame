@@ -112,6 +112,6 @@ public class GameManagerLevel2 : MonoBehaviour
     }
     void NextScene()
     {
-        SceneManager.LoadScene("Level3");
+        SceneManager.LoadScene("Level 3");
     }
 }
