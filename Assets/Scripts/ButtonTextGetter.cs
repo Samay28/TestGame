@@ -12,6 +12,7 @@ public class ButtonTextGetter : MonoBehaviour
     public Button[] buttons;
     public TextMeshProUGUI displayText;
     public TMP_Text scoreText;
+    public TMP_Text InfoText;
 
     private HashSet<char> uniqueLetters = new HashSet<char>();
     int score = 0;
@@ -34,18 +35,20 @@ public class ButtonTextGetter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TimeLeft.timer==0 && score >=4)
+        if (TimeLeft.timer == 0 && score >= 4)
         {
-            Debug.Log("Won!");
+            InfoText.text = "Game Won! Starting New Level!";
+            Invoke("ReloadScene", 5f);
         }
-        else
+        else if (TimeLeft.timer == 0 && score < 4)
         {
-            Debug.Log("Lost");
+            InfoText.text = "Game Lost! restarting Level!";
+            Invoke("ReloadScene", 5f);
         }
     }
     void PrintButtonLetter(int buttonIndex)
     {
-        if (buttonIndex >= 0 && buttonIndex < buttonTexts.Length && !string.IsNullOrEmpty(buttonTexts[buttonIndex].text) && TimeLeft.timer!=0)
+        if (buttonIndex >= 0 && buttonIndex < buttonTexts.Length && !string.IsNullOrEmpty(buttonTexts[buttonIndex].text) && TimeLeft.timer != 0)
         {
             char letter = buttonTexts[buttonIndex].text[0];
             if (uniqueLetters.Add(letter))
@@ -65,25 +68,30 @@ public class ButtonTextGetter : MonoBehaviour
 
     public void EnterText()
     {
-        if (displayText.text.Length >= 3 && TimeLeft.timer!=0)
+        if (TimeLeft.timer >= 0)
         {
             CheckWord(displayText.text);
         }
     }
     void CheckWord(string word)
     {
-        if (wordDictionary.IsValidWord(word))
+        if (displayText.text.Length < 3)
+        {
+            InfoText.text = "Enter 3 letters Minimum!";
+            ClearDisplayText();
+        }
+        else if (wordDictionary.IsValidWord(word))
         {
             score++;
             scoreText.text = "Score: " + score;
             ResetLetters();
             FindObjectOfType<RandomLetterGenerator>().GenerateRandomLetters();
-            Debug.Log("good");
+            InfoText.text = "Awesome!";
         }
         else
         {
             ClearDisplayText();
-            Debug.Log("ohno");
+            InfoText.text = "Try Again";
         }
     }
 
@@ -97,5 +105,10 @@ public class ButtonTextGetter : MonoBehaviour
     {
         RLG.DoGeneration();
         ClearDisplayText();
+    }
+    void ReloadScene()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 }
