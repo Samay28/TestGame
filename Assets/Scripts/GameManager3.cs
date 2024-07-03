@@ -5,24 +5,25 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManagerLevel2 : MonoBehaviour
+public class GameManagerLevel3 : MonoBehaviour
 {
 
     public TextMeshProUGUI[] buttonTexts;
     public Button[] buttons;
     public TextMeshProUGUI displayText;
     public TMP_Text scoreText;
-    public TMP_Text InfoText;
-
     private HashSet<char> uniqueLetters = new HashSet<char>();
     int score = 0;
     private WordList wordDictionary;
-    // private RandomLetterGenerator RLG;
     private Timer TimeLeft;
+    public TMP_Text InfoText;
+
+    public JumbledWordGeneration3 Answer;
     void Start()
     {
         wordDictionary = FindObjectOfType<WordList>();
         TimeLeft = FindObjectOfType<Timer>();
+        Answer = FindObjectOfType<JumbledWordGeneration3>();
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -79,12 +80,13 @@ public class GameManagerLevel2 : MonoBehaviour
             InfoText.text = "Enter 3 letters Minimum!";
             ClearDisplayText();
         }
-        else if (wordDictionary.IsValidWord(word))
+        else if (displayText.text == Answer.currentAnswer)
         {
             score++;
             scoreText.text = "Score: " + score;
-            ResetLetters();
-            FindObjectOfType<RandomLetterGenerator>().GenerateRandomLetters();
+            ClearDisplayText();
+            // FindObjectOfType<RandomLetterGenerator>().GenerateRandomLetters();
+            Answer.DoGeneration();
             InfoText.text = "Awesome!";
         }
         else
@@ -112,6 +114,6 @@ public class GameManagerLevel2 : MonoBehaviour
     }
     void NextScene()
     {
-        SceneManager.LoadScene("Level3");
+        SceneManager.LoadScene("Level1");
     }
 }
