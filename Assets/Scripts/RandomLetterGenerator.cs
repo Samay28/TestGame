@@ -7,6 +7,7 @@ using System.Linq;
 public class RandomLetterGenerator : MonoBehaviour
 {
     public TextMeshProUGUI[] LetterDisplays;
+
     void Start()
     {
         if (LetterDisplays.Length != 9)
@@ -14,28 +15,37 @@ public class RandomLetterGenerator : MonoBehaviour
             return;
         }
 
-        char[] letters = GenerateRandomLetters();
-        for (int i = 0; i < letters.Length; i++)
-        {
-            LetterDisplays[i].text = letters[i].ToString();
-        }
+        DoGeneration();
     }
 
-    char[] GenerateRandomLetters()
+    public char[] GenerateRandomLetters()
     {
         char[] letters = new char[9];
-        string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        string vowels = "AEIOU";
+        string consonants = "BCDFGHJKLMNPQRSTVWXYZ";
         System.Random rand = new System.Random();
 
-        for (int i = 0; i < 9; i++)
+        // vowels
+        for (int i = 0; i < 2; i++)
         {
-            int index;
+            char vowel;
             do
             {
-                index = rand.Next(alphabet.Length);
-            } while (letters.Contains(alphabet[index]));
+                vowel = vowels[rand.Next(vowels.Length)];
+            } while (letters.Contains(vowel));
 
-            letters[i] = alphabet[index];
+            letters[i] = vowel;
+        }
+
+        for (int i = 2; i < 9; i++)
+        {
+            char letter;
+            do
+            {
+                letter = (rand.Next(2) == 0) ? vowels[rand.Next(vowels.Length)] : consonants[rand.Next(consonants.Length)];
+            } while (letters.Contains(letter));
+
+            letters[i] = letter;
         }
 
         return letters;
@@ -44,4 +54,13 @@ public class RandomLetterGenerator : MonoBehaviour
     {
 
     }
+    public void DoGeneration()
+    {
+        char[] letters = GenerateRandomLetters();
+        for (int i = 0; i < letters.Length; i++)
+        {
+            LetterDisplays[i].text = letters[i].ToString();
+        }
+    }
 }
+
